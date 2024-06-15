@@ -1,0 +1,45 @@
+.post-card {
+  margin-bottom: 16px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+  background-color: #36382E;
+  color: white;
+}
+
+mat-card-subtitle {
+  color: white;
+}
+
+mat-card-content {
+  padding: 16px;
+}
+
+.post-timestamp {
+  font-size: 14px;
+  color: #999;
+}
+
+.post-comments {
+  font-size: 14px;
+  color: black;
+}
+
+button {
+  margin: 5px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: white;
+}
+
+.top-buttons {
+  margin-bottom: 15px;
+}

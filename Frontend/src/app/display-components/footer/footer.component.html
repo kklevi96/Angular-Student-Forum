@@ -1,0 +1,18 @@
+<footer *ngIf="authService.isLoggedIn" class="logged-in">
+  <mat-toolbar>
+    <button (click)="clickMethod()" [disabled]="!this.authService.deleteAllowed" color="warn" mat-mini-fab>
+      <mat-icon>person_remove</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    <mat-slide-toggle [(ngModel)]="this.authService.deleteAllowed">Delete yourself?</mat-slide-toggle>
+  </mat-toolbar>
+</footer>
+
+<!--https://www.grepper.com/answers/156772/angular+hide+element+from+component+when+on+certain+page-->
+<footer *ngIf="!authService.isLoggedIn && router.url!== '/register'" class="not-logged-in">
+  <mat-toolbar>
+    <button [routerLink]="['register']" class="register-button" color="primary" mat-raised-button>No account? Just click
+      here...
+    </button>
+  </mat-toolbar>
+</footer>

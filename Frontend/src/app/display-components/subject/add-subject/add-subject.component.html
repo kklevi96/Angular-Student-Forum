@@ -1,0 +1,66 @@
+<ng-container>
+  <mat-toolbar class="white">
+    <h2>Create subject</h2>
+    <span class="example-spacer"></span>
+    <button (click)="cancel()" color="warn" mat-fab>
+      <mat-icon>cancel</mat-icon>
+    </button>
+
+  </mat-toolbar>
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="subjectToCreate.name"
+           [formControl]="subjectNameForm"
+           matInput>
+    <mat-icon matSuffix>text_fields</mat-icon>
+    <mat-hint>Name of the subject</mat-hint>
+    <mat-error *ngIf="subjectNameForm.invalid">{{getSubjectNameErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>ID</mat-label>
+    <input [(ngModel)]="subjectToCreate.subjectCode"
+           [formControl]="subjectCodeForm"
+           matInput>
+    <mat-icon matSuffix>text_fields</mat-icon>
+    <mat-hint>ID of the subject</mat-hint>
+    <mat-error *ngIf="subjectCodeForm.invalid">{{getSubjectCodeErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Credit</mat-label>
+    <input [(ngModel)]="subjectToCreate.creditValue" [formControl]="subjectCreditForm"
+           matInput
+           type="number">
+
+    <mat-icon matSuffix>123</mat-icon>
+    <mat-hint>Credit value of the subject</mat-hint>
+    <mat-error *ngIf="subjectCreditForm.invalid">{{getSubjectCreditValueErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Subject semester</mat-label>
+    <input [(ngModel)]="subjectToCreate.semester" [formControl]="subjectSemesterForm"
+           matInput
+           type="number">
+    <mat-icon matSuffix>123</mat-icon>
+    <mat-hint>Which semester is the subject taught in</mat-hint>
+    <mat-error *ngIf="subjectSemesterForm.invalid">{{getSubjectSemesterErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-checkbox
+    [(ngModel)]="subjectToCreate.examSubject"
+  >
+    Exam required
+  </mat-checkbox>
+
+  <button
+    (click)="onAddSubject()"
+    [disabled]="subjectSemesterForm.invalid||subjectCreditForm.invalid||subjectNameForm.invalid||subjectCodeForm.invalid"
+    class="big-button"
+    color="accent"
+    mat-flat-button
+  >
+    <span class="big-button">Create subject</span>
+  </button>
+</ng-container>

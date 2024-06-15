@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" role="heading">
+  <button mat-fab routerLink="/home">
+    <mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="home">home</mat-icon>
+  </button>
+
+  <span class="example-spacer"></span>
+  <button *ngIf="!this.auth.isLoggedIn" mat-fab routerLink="/register">
+    <mat-icon>person_add</mat-icon>
+  </button>
+
+  <button *ngIf="!this.auth.isLoggedIn" color="accent" mat-fab routerLink="/login">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="login">login</mat-icon>
+  </button>
+  <ng-container *ngIf="this.auth.currentUser">
+    <app-logged-in-as></app-logged-in-as>
+
+    <button (click)="counter()"
+            *ngIf="this.auth.isLoggedIn && !this.auth.isAdmin() && this.auth.requiredClicks-this.auth.clickCount>=4"
+            color="primary"
+            mat-icon-button></button>
+
+    <button (click)="counter()"
+            *ngIf="this.auth.isLoggedIn && !this.auth.isAdmin() && this.auth.clickCount<this.auth.requiredClicks && this.auth.requiredClicks-this.auth.clickCount<4"
+            [color]="buttonColor()"
+            mat-fab></button>
+
+    <button (click)="removeAdmin()" *ngIf="this.auth.isLoggedIn && this.auth.isAdmin()" color="accent" mat-fab>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="lock">lock</mat-icon>
+    </button>
+
+    <button (click)="delegateAdmin()" *ngIf="this.auth.isLoggedIn && !this.auth.isAdmin()"
+            [disabled]="this.auth.clickCount<this.auth.requiredClicks" color="warn"
+            mat-fab>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="key"></mat-icon>
+    </button>
+  </ng-container>
+  <button *ngIf="this.auth.isLoggedIn" [routerLink]="['/logout']" color="accent" mat-fab>
+    <mat-icon aria-hidden="false" aria-label="Example home icon">logout</mat-icon>
+  </button>
+
+
+</mat-toolbar>

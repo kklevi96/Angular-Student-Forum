@@ -1,0 +1,2 @@
+<h2 (window:resize)="onResize($event)" *ngIf="authService.isLoggedIn && showText()">Logged in
+  as {{authService.currentUser?.userName}}</h2>

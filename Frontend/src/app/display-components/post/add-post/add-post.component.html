@@ -1,0 +1,14 @@
+<ng-container>
+  <mat-form-field>
+      <textarea [(ngModel)]="post.content" [formControl]="contentForm" matInput
+                name="content"
+                placeholder="Your post"></textarea>
+    <mat-error *ngIf="this.contentForm.invalid">{{getCreateErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <button (click)="addPost()" [disabled]="contentForm.invalid"
+          class="big-button"
+          color="primary"
+          mat-raised-button
+  ><span class="big-button">Add Post</span>
+  </button>
+</ng-container>

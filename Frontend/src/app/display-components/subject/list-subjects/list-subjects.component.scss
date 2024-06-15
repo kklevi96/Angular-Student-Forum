@@ -1,0 +1,48 @@
+h1 {
+  margin-bottom: 50px;
+}
+
+mat-card {
+  width: 300px;
+  margin: 5px;
+  min-height: 340px;
+  float: left;
+}
+
+mat-card {
+  .exam-icon {
+    font-size: 1.4em;
+    position: relative;
+    top: 0.5em;
+  }
+}
+
+.subject-id {
+  font-size: 0.8em;
+  color: #929292;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: rgb(192, 3, 3)
+}
+
+.clear {
+  clear: both;
+}
+
+button {
+  margin: 10px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: white;
+}
+

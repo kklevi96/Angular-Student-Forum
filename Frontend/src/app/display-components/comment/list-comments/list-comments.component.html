@@ -1,0 +1,29 @@
+<mat-spinner *ngIf="!comments"></mat-spinner>
+
+<ng-container *ngIf="comments">
+
+  <h1>Comments of {{post.content}}</h1>
+
+  <!--<mat-slide-toggle [(ngModel)]="showCreateForm" *ngIf="authService.isLoggedIn">Add Comment form</mat-slide-toggle>-->
+  <mat-toolbar class="top-buttons">
+    <button [routerLink]="['/posts/', post.subjectCode]"
+            mat-fab
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    <button (click)="showCreateForm=false" *ngIf="showCreateForm && authService.isLoggedIn" color="warn" mat-fab>
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <button (click)="showCreateForm=true" *ngIf="!showCreateForm && authService.isLoggedIn" color="primary" mat-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+  <app-add-comment (addClicked)="addClicked()" *ngIf="showCreateForm" [postId]="postId"></app-add-comment>
+
+  <ng-container *ngFor="let comment of comments" class="post-card">
+    <app-list-one-comment (deleteClicked)="deleteComment(comment.id)" [comment]="comment"></app-list-one-comment>
+  </ng-container>
+</ng-container>

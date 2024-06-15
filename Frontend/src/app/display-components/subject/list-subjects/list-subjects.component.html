@@ -1,0 +1,67 @@
+<div *ngIf="authService.isAdmin()" class="rightButtons">
+  <button (click)="showCreateForm=true" *ngIf="!showCreateForm" color="primary" mat-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<mat-spinner *ngIf="!subjects">
+</mat-spinner>
+
+<ng-container *ngIf="subjects && !showCreateForm">
+  <mat-card *ngFor="let subject of subjects">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{ subject.name }}</mat-card-title>
+        <mat-card-subtitle>{{ subject.subjectCode }}</mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Exam:
+        <mat-icon *ngIf="subject.examSubject" [ngClass]="{'green': subject.examSubject}" aria-label="" class="exam-icon"
+                  fontIcon="check_circle"></mat-icon>
+        <mat-icon *ngIf="!subject.examSubject" [ngClass]="{'red': !subject.examSubject}" aria-hidden="false"
+                  aria-label="" class="exam-icon" fontIcon="cancel"></mat-icon>
+      </p>
+      <p>Semester: {{subject.semester}}</p>
+      <p>Credit: {{ subject.creditValue }}</p>
+      <button *ngIf="subject.posts  && subject.posts.length == 1" [routerLink]="['/posts/', subject.subjectCode]"
+              class="center" color="primary"
+              mat-raised-button>{{ subject.posts.length }} post here
+        <mat-icon>list</mat-icon>
+      </button>
+      <button *ngIf="subject.posts && subject.posts.length != 1" [routerLink]="['/posts/', subject.subjectCode]"
+              class="center" color="primary"
+              mat-raised-button>{{ subject.posts.length }} posts here
+        <mat-icon>list</mat-icon>
+      </button>
+      <mat-divider *ngIf="authService.isAdmin()"></mat-divider>
+      <span *ngIf="authService.isLoggedIn">
+          <span *ngIf="authService.isAdmin()">
+            <button
+              [routerLink]="['/edit/subject/', subject.subjectCode]"
+              mat-mini-fab
+            >
+              <mat-icon aria-hidden="false" aria-label="Edit icon" fontIcon="edit"></mat-icon>
+
+            </button>
+            <button
+              (click)="deleteSubject(subject.subjectCode)" color="warn"
+              mat-mini-fab
+            >
+              <mat-icon aria-hidden="false" aria-label="Delete icon" fontIcon="delete"></mat-icon>
+
+            </button>
+          </span>
+        </span>
+      <span class="example-spacer"></span>
+
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<div class="clear"></div>
+
+<ng-container *ngIf="showCreateForm">
+  <app-add-subject (addClicked)="refresh()" (cancelClicked)="showCreateForm=false"></app-add-subject>
+</ng-container>

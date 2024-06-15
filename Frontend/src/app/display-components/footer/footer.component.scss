@@ -1,0 +1,33 @@
+button {
+  margin: 10px;
+}
+
+mat-slide-toggle {
+  font-size: 1.4em;
+  position: relative;
+  padding-right: 30px;
+
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.logged-in {
+  mat-toolbar {
+    background-color: #F5CF3C;
+  }
+}
+
+.not-logged-in {
+  mat-toolbar {
+    background-color: white;
+  }
+}
+
+.register-button {
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  border-radius: 100px;
+}

@@ -1,0 +1,40 @@
+<mat-card *ngIf="comment" class="post-card">
+  <mat-card-header>
+    <mat-card-title>{{ comment.content }}</mat-card-title>
+    <mat-card-subtitle>Commented by {{ comment.author.userName }}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="comment.editCount>1">
+      Edited {{comment.editCount}} times, last edit was on {{comment.lastEdited}}
+    </mat-card-subtitle>
+    <mat-card-subtitle *ngIf="comment.editCount===1">
+      Edited once on {{comment.lastEdited}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p *ngIf="comment.likes.length!==1" class="comment-likes">{{comment.likes.length}} likes on this comment.</p>
+    <p *ngIf="comment.likes.length===1" class="comment-likes">{{comment.likes.length}} like on this comment.</p>
+
+    <p class="comment-timestamp">Commented on {{ comment.timestamp }}</p>
+    <!--    <p *ngIf="comment.likes!==1" class="comment-likes">{{ comment.likes }} Likes</p>-->
+    <!--    <p *ngIf="comment.likes===1" class="comment-likes">{{ comment.likes }} Comment</p>-->
+    <mat-toolbar>
+      <button *ngIf="comment.siteUserId===authService.currentUser?.id || authService.isAdmin()"
+              [routerLink]="['/edit/comment/', comment.id]"
+              mat-mini-fab>
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="onDeleteComment()"
+              *ngIf="comment.siteUserId===authService.currentUser?.id || authService.isAdmin()"
+              color="warn"
+              mat-mini-fab>
+        <mat-icon>delete</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <button (click)="toggleLike()" *ngIf="!isLiked" color="primary" mat-fab>
+        <mat-icon>thumb_up</mat-icon>
+      </button>
+      <button (click)="toggleLike()" *ngIf="isLiked" color="accent" mat-fab>
+        <mat-icon>thumb_down</mat-icon>
+      </button>
+    </mat-toolbar>
+  </mat-card-content>
+</mat-card>

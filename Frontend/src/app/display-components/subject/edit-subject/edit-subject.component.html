@@ -1,0 +1,72 @@
+<ng-container *ngIf="!subject">
+  <mat-spinner></mat-spinner>
+</ng-container>
+
+<ng-container *ngIf="subject">
+  <mat-toolbar>
+    <h2>Update subject</h2>
+    <span class="example-spacer"></span>
+    <button (click)="router.navigate(['/subjects'])" color="warn" mat-fab>
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="this.subject.name"
+           [formControl]="subjectNameForm"
+           matInput>
+    <mat-icon matSuffix>text_fields</mat-icon>
+    <mat-hint>Name of the subject</mat-hint>
+    <mat-error *ngIf="subjectNameForm.invalid">{{getSubjectNameErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>ID</mat-label>
+    <input [(ngModel)]="this.subject.subjectCode"
+           disabled
+           matInput>
+    <mat-icon matSuffix>text_fields</mat-icon>
+    <mat-hint>ID of the subject</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Credit</mat-label>
+    <input [(ngModel)]="this.subject.creditValue" [formControl]="subjectCreditForm"
+           matInput
+           type="number">
+    <mat-icon matSuffix>123</mat-icon>
+    <mat-hint>Credit value of the subject</mat-hint>
+    <mat-error *ngIf="subjectCreditForm.invalid">{{getSubjectCreditValueErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Subject semester</mat-label>
+    <input [(ngModel)]="this.subject.semester" [formControl]="subjectSemesterForm"
+           matInput
+           type="number">
+    <mat-icon matSuffix>123</mat-icon>
+    <mat-hint>Which semester is the subject taught in</mat-hint>
+    <mat-error *ngIf="subjectSemesterForm.invalid">{{getSubjectSemesterErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-checkbox
+    [(ngModel)]="this.subject.examSubject"
+  >
+    Exam required
+  </mat-checkbox>
+
+  <button (click)="editSubject()"
+          [disabled]="subjectSemesterForm.invalid||subjectCreditForm.invalid||subjectNameForm.invalid||
+                      (oldSubject.name===this.subject.name &&
+                      oldSubject.semester===this.subject.semester &&
+                      oldSubject.examSubject===this.subject.examSubject &&
+                      oldSubject.creditValue===this.subject.creditValue)"
+          class="big-button"
+          color="accent"
+          mat-flat-button
+
+  >
+    <span class="big-button">Update subject</span>
+  </button>
+</ng-container>

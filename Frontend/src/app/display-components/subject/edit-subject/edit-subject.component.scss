@@ -1,0 +1,26 @@
+mat-form-field, mat-checkbox {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+button {
+  margin-bottom: 30px;
+}
+
+.big-button {
+  height: 150px;
+  font-weight: bold;
+  font-size: xx-large;
+  text-align: center;
+  border-radius: 100px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+mat-toolbar {
+  background-color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
